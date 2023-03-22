@@ -34,6 +34,9 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: install python requirements
+        run: python -m pip install click
+
       - name: build docker images
         run: python scripts/main.py build --all
 
