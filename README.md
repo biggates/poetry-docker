@@ -1,8 +1,10 @@
 # poetry-docker
 
-## contents
+a Docker image that includes [Poetry](https://python-poetry.org/) and [Python](https://www.python.org/) for use in CI/CD pipelines.
 
-based on python docker, with `pipx` and `poetry` installed
+## supported python tags
+
+see [python_versions.json](./python_versions.json)
 
 ## build manuly
 
@@ -13,5 +15,17 @@ python build --all
 or:
 
 ```bash
-python build --tag 3.10-slim
+python build 3.10-slim
+```
+
+## push manully
+
+```bash
+python push --all
+```
+
+or:
+
+```bash
+python push 3.10-slim
 ```
