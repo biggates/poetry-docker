@@ -45,3 +45,52 @@ or:
 ```bash
 python push 3.10-slim
 ```
+
+## details
+
+poetry is installed to `/root/.local/bin` via pipx. In case the path fails, use the following line in Dockerfile:
+
+```dockerfile
+ENV PATH="/root/.local/bin:$PATH"
+```
+
+## Usage in multistage builds
+
+A typical usage is use poetry to install all the dependencies in one stage, and copy the whole venv to another stage and use it.
+
+```dockerfile
+# first stage
+FROM biggates/poetry:3.10-slim as venv-creator
+
+# activate poetry
+ENV PATH="/root/.local/bin:$PATH"
+
+WORKDIR /app
+
+# add poetry managed dependencies
+ADD poetry.lock ./
+ADD poetry.toml ./
+ADD pyproject.toml ./
+
+# let poetry create the venv
+RUN poetry install
+
+# second stage
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# add current project files
+COPY . /app
+
+# copy the previously created venv
+COPY --from=venv-creator /app/.venv /app/.venv
+
+# activate the venv
+ENV PATH="/app/.venv/bin:$PATH"
+
+# rest of your dockerfile
+CMD ["python", "-m", "myscript.py"]
+
+```
+

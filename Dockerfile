@@ -12,6 +12,8 @@ COPY --from=download_server /tmp/*.whl /tmp/
 
 RUN python -m pip install --no-index --find-links=/tmp/ pipx
 
+RUN rm -rf /tmp/*.*
+
 RUN python -m pipx install poetry
 
 RUN python -m pipx ensurepath
