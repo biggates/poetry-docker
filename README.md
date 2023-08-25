@@ -4,6 +4,14 @@
 
 a Docker image that includes [Poetry](https://python-poetry.org/) and [pipx](https://pypa.github.io/pipx/) CI/CD pipelines.
 
+## Deprecation Notice
+
+Deprecated, please use `weastur/poetry` instead, e.g. :
+
+- `weastur/poetry:1.5.1-python-3.10-slim`
+- `weastur/poetry:1.5.1-python-3.10-alpine`
+- `weastur/poetry:1.5.1-python-3.8-slim`
+
 ## Supported tags
 
 - `3.8-slim`
