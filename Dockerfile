@@ -1,20 +1,31 @@
 ARG PYTHON_IMAGE=3.10-slim
 
-FROM python:$PYTHON_IMAGE as download_server
+FROM python:${PYTHON_IMAGE}
+
 ARG POETRY_VERSION
-
-RUN python -m pip download pipx poetry==$POETRY_VERSION --no-cache-dir --dest /tmp/ 
-
-FROM python:$PYTHON_IMAGE
-ARG POETRY_VERSION
-
-ENV DEBIAN_FRONTEND=nointeractive
-
-COPY --from=download_server /tmp/*.whl /tmp/
 
 LABEL org.opencontainers.image.authors="biggates2010@gmail.com"
 
-RUN python -m pip install --no-index --find-links=/tmp/ pipx
+ENV PATH=/root/.local/bin:$PATH
 
-RUN python -m pipx install poetry==${POETRY_VERSION} --pip-args "--no-index --find-links=/tmp/"
-RUN python -m pipx ensurepath && rm -rf /tmp/*.whl
+RUN --mount=type=bind,source=install.py,target=/install.py set -eux; \
+    apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        libssl-dev \
+        libffi-dev \
+        cargo \
+        pkg-config \
+    ; \
+    POETRY_VERSION=$POETRY_VERSION python /install.py ; \
+    apt-get purge -y \
+        build-essential \
+        libssl-dev \
+        libffi-dev \
+        cargo \
+        pkg-config \
+    ; \
+    apt-get autoremove -y ; \
+    rm -rf /var/lib/apt/lists/* ; \
+    poetry --version
+
+CMD ["python3"]

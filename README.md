@@ -20,7 +20,7 @@ In your pipeline / actions, replace docker image from `python` to `biggates/poet
 
 ```dockerfile
 # FROM python:3.10-slim
-FROM biggates/poetry:3.10-slim
+FROM biggates/poetry:1.8.2-py3.10-slim
 ```
 
 ## build manuly
