@@ -1,26 +1,16 @@
 # poetry-docker
 
-![3.8-slim badge](https://img.shields.io/docker/v/biggates/poetry/3.8-slim?label=biggates%2Fpoetry&logo=docker) ![3.9-slim badge](https://img.shields.io/docker/v/biggates/poetry/3.9-slim?label=biggates%2Fpoetry&logo=docker) ![3.10-slim badge](https://img.shields.io/docker/v/biggates/poetry/3.10-slim?label=biggates%2Fpoetry&logo=docker) ![3.11-slim badge](https://img.shields.io/docker/v/biggates/poetry/3.11-slim?label=biggates%2Fpoetry&logo=docker) ![3.12-slim badge](https://img.shields.io/docker/v/biggates/poetry/3.12-slim?label=biggates%2Fpoetry&logo=docker) [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)
+![1.6.0-py3.8-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.8-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.9-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.9-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.10-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.10-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.11-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.11-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.12-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.12-slim?label=biggates%2Fpoetry&logo=docker) [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)
 
 a Docker image that includes [Poetry](https://python-poetry.org/) and [pipx](https://pypa.github.io/pipx/) CI/CD pipelines.
 
-## Deprecation Notice
-
-Deprecated, please use `weastur/poetry` instead, e.g. :
-
-- `weastur/poetry:1.6.1-python-3.12-slim`
-- `weastur/poetry:1.6.1-python-3.11-slim`
-- `weastur/poetry:1.6.1-python-3.10-slim`
-- `weastur/poetry:1.6.1-python-3.10-alpine`
-- `weastur/poetry:1.6.1-python-3.8-slim`
-
 ## Supported tags
 
-- `3.8-slim`
-- `3.9-slim`
-- `3.10-slim`
-- `3.11-slim`
-- `3.12-slim`
+- `1.8.2-py3.12-slim`
+- `1.8.2-py3.11-slim`
+- `1.8.2-py3.10-slim`
+- `1.8.2-py3.9-slim`
+- `1.8.2-py3.8-slim`
 
 see [python_versions.json](./python_versions.json)
 
