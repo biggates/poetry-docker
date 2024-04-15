@@ -124,7 +124,7 @@ def _check_input(
     if len(poetry_versions) == 0:
         click.secho("No poetry version specified", fg="red")
 
-    return (python_tags, poetry)
+    return (python_tags, poetry_versions)
 
 
 @main.command
