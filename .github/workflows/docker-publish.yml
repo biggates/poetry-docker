@@ -55,7 +55,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: biggates/poetry:${{ matrix.poetry_version }}-py${{ matrix.python_version }}-slim
+          tags: biggates/poetry:${{ matrix.poetry_version }}-py${{ matrix.python_version }}
           build-args: |
             PYTHON_IMAGE=${{ matrix.python_version }}
             POETRY_VERSION=${{ matrix.poetry_version }}
