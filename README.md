@@ -1,8 +1,8 @@
 # poetry-docker
 
-![1.6.0-py3.8-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.8-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.9-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.9-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.10-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.10-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.11-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.11-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.12-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.12-slim?label=biggates%2Fpoetry&logo=docker) [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)
+![1.8.2-py3.12-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.12-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.11-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.11-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.10-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.10-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.9-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.9-slim?label=biggates%2Fpoetry&logo=docker) ![1.8.2-py3.8-slim badge](https://img.shields.io/docker/v/biggates/poetry/1.8.2-py3.8-slim?label=biggates%2Fpoetry&logo=docker) [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)
 
-a Docker image that includes [Poetry](https://python-poetry.org/) and [pipx](https://pypa.github.io/pipx/) CI/CD pipelines.
+a Docker image that includes [Poetry](https://python-poetry.org/) for CI/CD pipelines.
 
 ## Supported tags
 
@@ -12,7 +12,7 @@ a Docker image that includes [Poetry](https://python-poetry.org/) and [pipx](htt
 - `1.8.2-py3.9-slim`
 - `1.8.2-py3.8-slim`
 
-see [python_versions.json](./python_versions.json)
+See [versions.json](./versions.json) for further information.
 
 ## Usage
 
@@ -23,33 +23,9 @@ In your pipeline / actions, replace docker image from `python` to `biggates/poet
 FROM biggates/poetry:1.8.2-py3.10-slim
 ```
 
-## build manuly
-
-```bash
-python build --all
-```
-
-or:
-
-```bash
-python build 3.10-slim
-```
-
-## push manully
-
-```bash
-python push --all
-```
-
-or:
-
-```bash
-python push 3.10-slim
-```
-
 ## details
 
-poetry is installed to `/root/.local/bin` via pipx. In case the path fails, use the following line in Dockerfile:
+Poetry is installed to `/root/.local/bin`. In case the path fails, use the following line in Dockerfile:
 
 ```dockerfile
 ENV PATH="/root/.local/bin:$PATH"
@@ -61,37 +37,38 @@ A typical usage is use poetry to install all the dependencies in one stage, and 
 
 ```dockerfile
 # first stage
-FROM biggates/poetry:3.10-slim as venv-creator
+FROM biggates/poetry:1.8.2-py3.10-slim as venv-creator
 
-# activate poetry
-ENV PATH="/root/.local/bin:$PATH"
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
 
 WORKDIR /app
 
 # add poetry managed dependencies
-ADD poetry.lock ./
-ADD poetry.toml ./
-ADD pyproject.toml ./
+ADD poetry.lock poetry.toml pyproject.toml README.md ./
 
 # let poetry create the venv
-RUN poetry install
+RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install
 
 # second stage
-FROM python:3.10-slim
+FROM python:3.10-slim as runtime
+
+# activate the venv
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
 
 WORKDIR /app
+
+# copy the previously created venv
+COPY --from=venv-creator ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 # add current project files
 COPY . /app
 
-# copy the previously created venv
-COPY --from=venv-creator /app/.venv /app/.venv
-
-# activate the venv
-ENV PATH="/app/.venv/bin:$PATH"
-
 # rest of your dockerfile
-CMD ["python", "-m", "myscript.py"]
-
+CMD ["python", "myscript.py"]
 ```
 
+reference: [Blazing fast Python Docker builds with Poetry](https://medium.com/@albertazzir/blazing-fast-python-docker-builds-with-poetry-a78a66f5aed0)
