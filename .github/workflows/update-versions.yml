@@ -2,6 +2,8 @@
 name: update workflow from versions
 
 on:
+  push:
+    branches: [ "develop" ]
   workflow_dispatch:
 
 jobs:
