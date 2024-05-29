@@ -35,4 +35,5 @@ if __name__ == "__main__":
 
         print("")
         print("## Supported tags")
+        print("")
         print(all_supported_tags)
