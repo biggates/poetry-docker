@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         python_version: ["3.12-slim", "3.11-slim", "3.10-slim", "3.9-slim", "3.8-slim"]
-        poetry_version: ["1.8.2", "1.7.1", "1.6.0"]
+        poetry_version: ["1.8.3", "1.7.1", "1.6.1"]
 
     steps:
       - name: Checkout repository
