@@ -23,7 +23,7 @@ if __name__ == "__main__":
         all_images = " ".join([_tag_to_markdown(tag) for tag in all_tags])
 
         all_markdown = (
-            all_images
+            "[" + all_images + "](https://hub.docker.com/r/biggates/poetry)" 
             + " [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)"
         )
 
