@@ -1,0 +1,24 @@
+---
+name: update workflow from versions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: fregante/setup-git-user@v2
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Update docker-publish workflow
+        run: ./scripts/update_workflow.py
+      - name: Push updates
+        run: |
+          git add .
+          git diff-index --quiet HEAD || git commit -m "actions: update docker-publish workflow"
+          git push
