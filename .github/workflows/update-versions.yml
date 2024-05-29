@@ -6,12 +6,17 @@ on:
     branches: [ "develop" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
       - uses: fregante/setup-git-user@v2
       - name: Setup python
         uses: actions/setup-python@v5
