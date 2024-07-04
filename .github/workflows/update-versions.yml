@@ -4,6 +4,8 @@ name: update workflow from versions
 on:
   push:
     branches: [ "develop" ]
+    paths:
+      - versions.json
   workflow_dispatch:
 
 jobs:
