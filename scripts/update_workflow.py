@@ -76,8 +76,6 @@ WORKFLOW_MATRIX_TEMPLATE = Template("""
             python_version: "3.13-bookworm"
           - poetry_version: "1.8.4"
             python_version: "3.13-slim"
-          - poetry_version: "1.8.4"
-            python_version: "3.13-alpine"
                                     
 """)
 
