@@ -23,11 +23,16 @@ jobs:
 
     strategy:
       matrix:
-        python_version: ["3.12-bullseye", "3.12-slim", "3.11-slim", "3.10-bullseye", "3.10-slim", "3.9-slim", "3.8-slim"]
+        python_version: ["3.12-bullseye", "3.12-slim", "3.12-alpine", "3.11-slim", "3.11-alpine", "3.10-bullseye", "3.10-slim", "3.10-alpine"]
         poetry_version: ["1.8.4", "1.7.1"]
         include:
-          - poetry_verison: "1.8.4"
+          - poetry_version: "1.8.4"
+            python_version: "3.13-bookworm"
+          - poetry_version: "1.8.4"
             python_version: "3.13-slim"
+          - poetry_version: "1.8.4"
+            python_version: "3.13-alpine"
+                                    
 
     steps:
       - name: Checkout repository
