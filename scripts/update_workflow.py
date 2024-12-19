@@ -55,7 +55,7 @@ WORKFLOW_AFTER = """
 
       - name: build and push docker image
         if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
@@ -72,11 +72,11 @@ WORKFLOW_MATRIX_TEMPLATE = Template("""
         python_version: $python_versions
         poetry_version: $poetry_versions
         include:
-          - poetry_version: "1.8.4"
+          - poetry_version: "1.8.5"
             python_version: "3.13-bookworm"
-          - poetry_version: "1.8.4"
+          - poetry_version: "1.8.5"
             python_version: "3.13-slim"
-                                    
+
 """)
 
 if __name__ == "__main__":
