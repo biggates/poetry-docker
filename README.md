@@ -1,18 +1,18 @@
 # poetry-docker
 
-[![2.1.2-py3.13-bookworm badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.13-bookworm?label=biggates%2Fpoetry&logo=docker) ![2.1.2-py3.13-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.13-slim?label=biggates%2Fpoetry&logo=docker) ![2.1.2-py3.12-bullseye badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.12-bullseye?label=biggates%2Fpoetry&logo=docker) ![2.1.2-py3.12-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.12-slim?label=biggates%2Fpoetry&logo=docker) ![2.1.2-py3.11-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.11-slim?label=biggates%2Fpoetry&logo=docker) ![2.1.2-py3.10-bullseye badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.10-bullseye?label=biggates%2Fpoetry&logo=docker) ![2.1.2-py3.10-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.2-py3.10-slim?label=biggates%2Fpoetry&logo=docker)](https://hub.docker.com/r/biggates/poetry) [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)
+[![2.1.3-py3.13-bookworm badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.13-bookworm?label=biggates%2Fpoetry&logo=docker) ![2.1.3-py3.13-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.13-slim?label=biggates%2Fpoetry&logo=docker) ![2.1.3-py3.12-bullseye badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.12-bullseye?label=biggates%2Fpoetry&logo=docker) ![2.1.3-py3.12-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.12-slim?label=biggates%2Fpoetry&logo=docker) ![2.1.3-py3.11-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.11-slim?label=biggates%2Fpoetry&logo=docker) ![2.1.3-py3.10-bullseye badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.10-bullseye?label=biggates%2Fpoetry&logo=docker) ![2.1.3-py3.10-slim badge](https://img.shields.io/docker/v/biggates/poetry/2.1.3-py3.10-slim?label=biggates%2Fpoetry&logo=docker)](https://hub.docker.com/r/biggates/poetry) [![Docker Publish Badge](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/biggates/poetry-docker/actions/workflows/docker-publish.yml)
 
 a Docker image that includes [Poetry](https://python-poetry.org/) for CI/CD pipelines.
 
 ## Supported tags
 
-- `2.1.2-py3.13-bookworm`
-- `2.1.2-py3.13-slim`
-- `2.1.2-py3.12-bullseye`
-- `2.1.2-py3.12-slim`
-- `2.1.2-py3.11-slim`
-- `2.1.2-py3.10-bullseye`
-- `2.1.2-py3.10-slim`
+- `2.1.3-py3.13-bookworm`
+- `2.1.3-py3.13-slim`
+- `2.1.3-py3.12-bullseye`
+- `2.1.3-py3.12-slim`
+- `2.1.3-py3.11-slim`
+- `2.1.3-py3.10-bullseye`
+- `2.1.3-py3.10-slim`
 
 See [versions.json](./versions.json) for further information.
 
@@ -22,7 +22,7 @@ In your pipeline / actions, replace docker image from `python` to `biggates/poet
 
 ```dockerfile
 # FROM python:3.10-slim
-FROM biggates/poetry:2.1.2-py3.10-slim
+FROM biggates/poetry:2.1.3-py3.10-slim
 ```
 
 ## details
@@ -39,7 +39,7 @@ A typical usage is use poetry to install all the dependencies in one stage, and 
 
 ```dockerfile
 # first stage
-FROM biggates/poetry:2.1.2-py3.10-slim as venv-creator
+FROM biggates/poetry:2.1.3-py3.10-slim as venv-creator
 
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
