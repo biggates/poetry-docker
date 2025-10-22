@@ -23,26 +23,17 @@ jobs:
 
     strategy:
       matrix:
-        python_version: ["3.12-bullseye", "3.12-slim", "3.11-slim", "3.10-bullseye", "3.10-slim"]
-        poetry_version: ["2.1.4", "2.0.1", "1.8.5", "1.7.1"]
+        python_version: ["3.13-bookworm", "3.13-slim", "3.12-bookworm", "3.12-slim", "3.11-bookworm", "3.11-slim", "3.10-bookworm", "3.10-slim"]
+        poetry_version: ["2.2.1", "2.1.4", "2.0.1", "1.8.5"]
         include:
-          - poetry_version: "2.1.4"
-            python_version: "3.13-bookworm"
-          - poetry_version: "2.1.4"
-            python_version: "3.13-slim"
-          - poetry_version: "2.0.1"
-            python_version: "3.13-bookworm"
-          - poetry_version: "2.0.1"
-            python_version: "3.13-slim"
-          - poetry_version: "1.8.5"
-            python_version: "3.13-bookworm"
-          - poetry_version: "1.8.5"
-            python_version: "3.13-slim"
-
+          - poetry_version: "2.2.1"
+            python_version: "3.14-bookworm"
+          - poetry_version: "2.2.1"
+            python_version: "3.14-slim"
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v3
