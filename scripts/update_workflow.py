@@ -72,6 +72,10 @@ WORKFLOW_MATRIX_TEMPLATE = Template("""
         python_version: $python_versions
         poetry_version: $poetry_versions
         include:
+          - poetry_version: "2.3.3"
+            python_version: "3.14-bookworm"
+          - poetry_version: "2.3.3"
+            python_version: "3.14-slim"
           - poetry_version: "2.2.1"
             python_version: "3.14-bookworm"
           - poetry_version: "2.2.1"
