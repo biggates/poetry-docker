@@ -34,10 +34,10 @@ jobs:
 WORKFLOW_AFTER = """
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Download poetry installer
         run: |
@@ -47,7 +47,7 @@ WORKFLOW_AFTER = """
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -72,9 +72,13 @@ WORKFLOW_MATRIX_TEMPLATE = Template("""
         python_version: $python_versions
         poetry_version: $poetry_versions
         include:
-          - poetry_version: "2.3.3"
+          - poetry_version: "2.4.1"
             python_version: "3.14-bookworm"
-          - poetry_version: "2.3.3"
+          - poetry_version: "2.4.1"
+            python_version: "3.14-slim"
+          - poetry_version: "2.3.4"
+            python_version: "3.14-bookworm"
+          - poetry_version: "2.3.4"
             python_version: "3.14-slim"
           - poetry_version: "2.2.1"
             python_version: "3.14-bookworm"
